@@ -1,0 +1,536 @@
+{
+  "name": "Video Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        272,
+        304
+      ],
+      "id": "7a2a615b-4e55-42c0-b189-eb543948f0af",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "MngYI16Q2geC1UUA",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        336
+      ],
+      "id": "cda44644-3d15-49fe-88d5-fc858f73024c",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n \"caption\": \"\",\n \"idea\": \"\",\n \"environment\": \"\",\n \"status\": \"\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        304
+      ],
+      "id": "d154fcc4-2251-4a1f-baf9-03fa640b38a0",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c275a3d8-9205-4333-a32b-af9669159718",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Give me an idea to create short-form TikTok/Instagram content about International students studying abroad, building personal brands, and finding jobs.\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=** Purpose **\nYou generate viral short-form video ideas styled like modern TikTok/Instagram vlogs that promote career growth, personal branding, and job success stories for international master’s/PG students.\nThese should feel personal, emotional, relatable, and aspirational — showing students the journey from study to career abroad.\n\n** Think Tool Prompt (used before generation) **\n“How can I take a real student challenge (like finding a job abroad, building a portfolio, networking, or personal branding) and turn it into a relatable, inspiring, or funny TikTok-style video idea that feels natural, modern, and career-focused?”\n\n** Output Requirements **\nYour response must include:\n\ncaption – Short, witty, emotional, or funny TikTok-style caption. Add 3–5 hashtags (e.g., #studyabroadlife #careerhacks #personalbranding #jobready).\n\nidea – 1–2 sentence summary of the action, story, or twist in the video.\n\nenvironment – Describe what the set looks like: campus dorms, cityscapes, cafes, job fairs, co-working spaces, etc. Must feel authentic and modern.\n\nstatus – Must be \"to create\", without quotation marks.\n\n** JSON Output Parser **\nEvery output must strictly follow this format:\n{\n \"caption\": \"\",\n \"idea\": \"\",\n \"environment\": \"\",\n \"status\": \"\"\n}\n\n** Sample Outputs **\n{\n \"caption\": \"POV: When LinkedIn says ‘Easy Apply’ but it’s 72 questions long 🤯💼 #studyabroadlife #jobhunt\",\n \"idea\": \"Student starts confidently clicking 'Apply,' then the camera cuts to them stressed out answering endless questions.\",\n \"environment\": \"Small student apartment desk setup with laptop, coffee mug, sticky notes, soft LED lighting at night.\",\n \"status\": \"to create\"\n}\n\nExample 2\n{\n \"caption\": \"Me updating my resume at 3AM before a career fair 🥲📄 #careergrind #internationalstudent\",\n \"idea\": \"Quick cuts of a student frantically editing their CV, googling templates, and practicing their ‘Tell me about yourself’ speech in the mirror.\",\n \"environment\": \"Dorm room lit with fairy lights, laptop open with multiple tabs, messy desk full of books and snacks.\",\n \"status\": \"to create\"\n}\n\nExample 3\n{\n \"caption\": \"When your portfolio finally lands you an interview abroad 😭🙌 #personalbranding #jobready\",\n \"idea\": \"Student jumps with excitement after getting an email notification, cuts to a ‘before and after’ of their portfolio transformation.\",\n \"environment\": \"Modern co-working space with big windows, natural light, open laptop showing email notification.\",\n \"status\": \"to create\"\n}\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "fbcd6ce5-541c-4e04-85a6-e5832a5bb0b6",
+      "name": "Generate a Idea/Content"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        784,
+        304
+      ],
+      "id": "0a0bf30f-31ec-4689-b75a-79bbf76eadce",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "MngYI16Q2geC1UUA",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        304
+      ],
+      "id": "0c6fa1e9-0976-4afb-934c-27ea0c100b5a",
+      "name": "Think1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Create a prompt for the Veo3 video based on the following information:\n\nIdea: {{ $json.output.idea }}\nEnvironment: {{ $json.output.environment }}\n",
+        "options": {
+          "systemMessage": "=** System Message **\n\nYou are a professional cinematic prompt generator for AI video tools.  \nYour task is to convert a short-form video idea and its environment description (inspired by international students studying abroad, career growth, and personal branding) into a highly detailed, camera-aware, emotionally rich prompt suitable for generating a cinematic AI video using Veo3.  \n\nYou must understand the emotional tone, visual aesthetics, and storytelling style of short-form TikTok/Instagram videos that capture the struggles and wins of students abroad — from studying and networking to building portfolios and landing jobs.  \n\n** Veo3 Prompt Structure Guidelines **  \n\nEach prompt should be natural, cinematic, and visually immersive, including:  \n- **Scene description** – Describe the overall environment clearly (campus, dorms, cafes, job fairs, city streets, co-working spaces, lighting, movement).  \n- **Character focus** – If the idea involves a student, include their position, outfit style (casual/modern), mood/expression, and framing (e.g., close-up, wide shot, handheld vlog style).  \n- **Camera movement** – Always include one cinematic camera motion (e.g., slow push-in, handheld tracking, dolly backward, orbit pan).  \n- **Time of day & lighting** – Set the mood with light (e.g., early morning sunlight, neon city glow, golden hour, soft indoor LED).  \n- **Atmosphere & texture** – Mention realistic details like laptop screens, coffee steam, city noise, fabric movement, reflections, wind, or imperfections to increase realism.  \n- **Style & quality** – Include cinematic tone, natural yet polished aesthetic, TikTok pacing, analog warmth, slight vintage softness, or GoPro-like intimacy when appropriate.  \n\n** Input **  \n\n- You will receive two fields: idea, environment  \n- Return only the complete and detailed Veo3 prompt, no additional text.  \n\n** Example Outputs **  \n\n**Example 1 – Late-night job prep**  \nA student sits at a cluttered dorm desk at 3AM, typing frantically on their laptop as coffee steam rises beside them. The handheld camera pushes slowly closer as the student pauses, sighs, and practices an interview answer in the mirror across the room. Papers are scattered, fairy lights glow dimly, and a phone screen lights up with a LinkedIn job alert. The atmosphere feels both anxious and determined, with soft shadows and warm highlights. Shot in cinematic 24fps with natural tones and slight vintage softness, evoking late-night study grind energy.  \n\n**Example 2 – Portfolio breakthrough moment**  \nInside a bright co-working space with tall windows, a student scrolls on their laptop and suddenly gasps at an interview email. The camera orbits around them as they leap out of their chair with excitement, knocking over a coffee cup. Sunlight streams through glass walls, illuminating dust particles and creating sharp highlights across modern desks. The scene feels triumphant yet real, shot handheld at eye-level with smooth cinematic motion, blending natural light with the polished aesthetic of startup culture.  \n\n**Example 3 – Networking nerves**  \nA crowded university career fair unfolds under bright fluorescent lighting. The camera dollies backward as a nervous student adjusts their blazer and rehearses lines under their breath before approaching a recruiter’s booth. Voices echo in the hall, paper flyers flutter slightly in the air-conditioning, and fluorescent lights flicker. The student’s expression shifts from anxious to confident as they step forward. The scene is captured with a subtle slow push-in, focusing on their face as they muster courage, styled like a cinematic documentary of a pivotal life moment.  \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        928,
+        0
+      ],
+      "id": "c3c8e68a-107b-4edd-bc5b-b0c6fe148629",
+      "name": "Video prompt"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1L-9kppu-MVZccXsmfaXqTLTplSXOSy1JTCDe0TftcMw",
+          "mode": "list",
+          "cachedResultName": "VEO 3 Video editor",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L-9kppu-MVZccXsmfaXqTLTplSXOSy1JTCDe0TftcMw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L-9kppu-MVZccXsmfaXqTLTplSXOSy1JTCDe0TftcMw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Ideas": "={{ $('Generate a Idea/Content').item.json.output.idea }}",
+            "Environment": "={{ $('Generate a Idea/Content').item.json.output.environment }}",
+            "Captions": "={{ $('Generate a Idea/Content').item.json.output.caption }}",
+            "Status": "={{ $('Generate a Idea/Content').item.json.output.status }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Ideas",
+              "displayName": "Ideas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Captions",
+              "displayName": "Captions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Environment",
+              "displayName": "Environment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1280,
+        0
+      ],
+      "id": "90e9a2dc-e1b4-4b81-9b86-2b17f2414e30",
+      "name": "Saved Content",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ImWFz5fHFowPMTIb",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://queue.fal.run/fal-ai/veo3",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={ \"prompt\": \"{{ $('Video prompt').item.json.output }}\" }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1488,
+        0
+      ],
+      "id": "db972130-3a9c-43fe-a017-f16bb6c4a293",
+      "name": "Create Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "h26niMJ7A2oD8c3P",
+          "name": "Fal AI Test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1696,
+        0
+      ],
+      "id": "3d9950b5-33da-4594-8d36-4fcbbc3bc317",
+      "name": "Wait for 10 Minutes",
+      "webhookId": "ba646e53-3a64-4db8-86a8-b2e5fa1ee83f"
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/veo3/requests/{{ $json.request_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1904,
+        0
+      ],
+      "id": "dc5a069a-186b-4d82-884b-c00bd71cd12e",
+      "name": "Get Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "h26niMJ7A2oD8c3P",
+          "name": "Fal AI Test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1L-9kppu-MVZccXsmfaXqTLTplSXOSy1JTCDe0TftcMw",
+          "mode": "list",
+          "cachedResultName": "VEO 3 Video editor",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L-9kppu-MVZccXsmfaXqTLTplSXOSy1JTCDe0TftcMw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L-9kppu-MVZccXsmfaXqTLTplSXOSy1JTCDe0TftcMw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Ideas",
+              "displayName": "Ideas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Captions",
+              "displayName": "Captions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Environment",
+              "displayName": "Environment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2112,
+        0
+      ],
+      "id": "aca7bf1e-38f1-4233-aca6-7e5def9db901",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ImWFz5fHFowPMTIb",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate a Idea/Content",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Generate a Idea/Content",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Generate a Idea/Content",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Generate a Idea/Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Video prompt",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Video prompt",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate a Idea/Content": {
+      "main": [
+        [
+          {
+            "node": "Video prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video prompt": {
+      "main": [
+        [
+          {
+            "node": "Saved Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Saved Content": {
+      "main": [
+        [
+          {
+            "node": "Create Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Video": {
+      "main": [
+        [
+          {
+            "node": "Wait for 10 Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for 10 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "7f26f7a0-b1fc-4b2e-ad9e-43befb966931",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0bc77d1e83eb271c93d761935713d306621ca9e7f4a7a40c1c9c6764db49cd61"
+  },
+  "id": "KkhuHvdPeqyLl3Pm",
+  "tags": []
+}
